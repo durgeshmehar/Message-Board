@@ -91,16 +91,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'APP': {
-#             'client_id': '512523586453-9109vv1f7112932s9slm150qk1cdomen.apps.googleusercontent.com',
-#             'secret': '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',
-#             'key': ''
-#         }
-#     }
-# }
-
 WSGI_APPLICATION = 'a_core.wsgi.application'
 
 
