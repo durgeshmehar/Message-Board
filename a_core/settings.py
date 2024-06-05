@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_htmx',
     'a_home',
     'a_users',
+    'a_messageboard',
 ]
 
 SITE_ID = 2
@@ -153,6 +154,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_SIGNUP_REDIRECT_URL = "{% url 'account_signup' %}?next={% url 'profile-onboarding' %}"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+EMAIL_HOST_USER ='durgesh7840963569@gmail.com'
+EMAIL_HOST_PASSWORD ='xcos mgzm npei mgys'
+DEFAULT_FROM_EMAIL = 'Message Django Board'
+
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
