@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
+from celery import shared_task
 
 import threading
 from .models import *
@@ -43,7 +44,7 @@ def subscribe(request):
         
     return redirect('messageboard')
 
-
+@shared_task
 def send_email(message):
     messageboard = message.messageboard 
     subscribers = messageboard.subscribers.all()
