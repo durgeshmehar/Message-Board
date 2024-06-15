@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from celery import shared_task
+from .tasks import send_email_thread
+
 
 import threading
 from .models import *
@@ -44,7 +45,6 @@ def subscribe(request):
         
     return redirect('messageboard')
 
-@shared_task
 def send_email(message):
     messageboard = message.messageboard 
     subscribers = messageboard.subscribers.all()
@@ -53,10 +53,12 @@ def send_email(message):
         subject = f'New Message from {message.author.profile.name}'
         body = f'{message.author.profile.name}: {message.body}\n\nRegards from\nMy Message Board'
 
-        email_thread = threading.Thread(target=send_email_thread, args=(subject, body, subscriber))
-        email_thread.start()
+        send_email_thread.delay(subject, body, subscriber.email)
+
+#         email_thread = threading.Thread(target=send_email_thread, args=(subject, body, subscriber))
+#         email_thread.start()
         
         
-def send_email_thread(subject, body, subscriber):        
-    email = EmailMessage(subject, body, to=[subscriber.email])
-    email.send()
+# def send_email_thread(subject, body, subscriber):        
+#     email = EmailMessage(subject, body, to=[subscriber.email])
+#     email.send()
