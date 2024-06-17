@@ -1,7 +1,7 @@
 # Notify
 
 Notify is a message board application that leverages Celery for email notifications and threading for handling concurrency. This project aims to provide an efficient and scalable platform for managing and sending notifications.
-Click here to explore <a href="#">Notify</a> website.
+Click here to explore <a href="https://github.com/durgeshmehar/Message-Board">Notify</a> website.
 
 
 ## Features
