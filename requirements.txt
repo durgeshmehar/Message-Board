@@ -11,3 +11,6 @@ redis==5.0.6
 requests==2.32.3
 PyJWT==2.8.0
 cryptography
+whitenoise
+psycopg2-binary
+
