@@ -3,6 +3,8 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from .tasks import send_email_thread
+from django.contrib.auth.decorators import user_passes_test
+
 
 
 import threading
@@ -50,7 +52,7 @@ def send_email(message):
     subscribers = messageboard.subscribers.all()
     
     for subscriber in subscribers: 
-        subject = f'New Message from {message.author.profile.name}'
+        subject = f'Django Celery Message from {message.author.profile.name}'
         body = f'{message.author.profile.name}: {message.body}\n\nRegards from\nMy Message Board'
 
         send_email_thread.delay(subject, body, subscriber.email)
@@ -62,3 +64,11 @@ def send_email(message):
 # def send_email_thread(subject, body, subscriber):        
 #     email = EmailMessage(subject, body, to=[subscriber.email])
 #     email.send()
+
+# newsletter
+def isStaff(user):
+    return user.is_staff
+
+@user_passes_test(isStaff)
+def newsletter(request):
+    return render(request, 'a_messageboard/newsletter.html')
