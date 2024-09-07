@@ -76,7 +76,11 @@ def profile_emailchange(request):
 
 @login_required
 def profile_emailverify(request):
-    send_email_confirmation(request, request.user)
+    try:
+        send_email_confirmation(request, request.user)
+        messages.success(request, "Verification email sent!")
+    except Exception as e:
+        messages.error(request, f"Error: {str(e)}")
     return redirect('profile-settings')
 
 
