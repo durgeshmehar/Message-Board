@@ -5,6 +5,7 @@ from environ import Env
 env = Env()
 Env.read_env()
 ENVIRONMENT = env('ENVIRONMENT', default='development')
+ENVIRONMENT="development"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,8 +23,9 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com', ".railway.app","message-board-production-e730.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com','.railway.app','https://message-board-production-e730.up.railway.app']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com',"message-board-production-e730.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com','https://message-board-production-e730.up.railway.app',
+    'https://*.railway.app']
 INTERNAL_IPS = [
     "localhost:8000",'localhost', '127.0.0.1', '*'
 ]
