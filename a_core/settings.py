@@ -22,7 +22,8 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com']
+CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com']
 INTERNAL_IPS = [
     "localhost:8000",'localhost', '127.0.0.1', '*'
 ]
