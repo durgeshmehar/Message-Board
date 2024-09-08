@@ -1,5 +1,5 @@
 celery==5.4.0
-cryptography==2.22
+cryptography==1.17.1
 django-allauth==0.63.3
 django-celery-results==2.5.1
 django_celery_beat==0.2.13
