@@ -22,7 +22,7 @@ if ENVIRONMENT == 'development':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com', ".railway.app"]
 CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com']
 INTERNAL_IPS = [
     "localhost:8000",'localhost', '127.0.0.1', '*'
@@ -197,7 +197,12 @@ DEFAULT_FROM_EMAIL = f"Django MessageBoard App {env('EMAIL_HOST_USER')}"
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+if ENVIRONMENT == 'development':
+    CELERY_BROKER_URL = 'redis://localhost:6379'
+else:
+    CELERY_BROKER_URL = env('REDIS_URL')
+
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP= True
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_EXTENDED = True
