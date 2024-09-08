@@ -14,17 +14,24 @@ from .forms import *
 @login_required
 def messageboard_view(request):
     messageboard = get_object_or_404(MessageBoard, id=1)
+    print("message:" ,messageboard)
     form = MessageCreateForm()
     
     if request.method == 'POST':
         if request.user in messageboard.subscribers.all():
             form = MessageCreateForm(request.POST)
             if form.is_valid:
-                message = form.save(commit=False)
-                message.author = request.user
-                message.messageboard = messageboard
-                message.save()
-                send_email(message)
+                try:
+                    message = form.save(commit=False)
+                    message.author = request.user
+                    message.messageboard = messageboard
+                    message.save()
+                    send_email(message)
+                except Exception as e:
+                    print(f"Email sending failed: {e}")
+                    messages.warning(request, f"Email sending failed: {e}")
+            else:
+                messages.warning(request, f'Invalid Form : {form.errors}')
         else:
             messages.warning(request, 'You need to be Subscribed!')
         return redirect('messageboard')
