@@ -23,7 +23,7 @@ else:
     DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'notify-o7iw.onrender.com', ".railway.app"]
-CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com']
+CSRF_TRUSTED_ORIGINS = [ 'https://notify-o7iw.onrender.com','.railway.app','https://message-board-production-e730.up.railway.app']
 INTERNAL_IPS = [
     "localhost:8000",'localhost', '127.0.0.1', '*'
 ]
