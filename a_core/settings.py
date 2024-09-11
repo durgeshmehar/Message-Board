@@ -202,9 +202,26 @@ ACCOUNT_EMAIL_REQUIRED = True
 # CELERY_BROKER_URL = 'redis://localhost:6379'
 if ENVIRONMENT == 'development':
     CELERY_BROKER_URL = 'redis://localhost:6379'
+    CELERY_RESULT_BACKEND = 'django-db'
 else:
     CELERY_BROKER_URL = env('REDIS_URL')
+    CELERY_RESULT_BACKEND = env('REDIS_URL')
 
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP= True
-CELERY_RESULT_BACKEND = 'django-db'
 CELERY_RESULT_EXTENDED = True
+
+if ENVIRONMENT == 'development':
+    LOCATION = 'redis://localhost:6379'
+else:
+    LOCATION = env('REDIS_URL')
+        
+# cacheing
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": LOCATION,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
